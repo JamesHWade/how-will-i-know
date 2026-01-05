@@ -927,6 +927,178 @@
             }
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: var(--deep-sage);
+            color: var(--soft-white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 20px var(--medium-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            background: var(--muted-slate);
+        }
+
+        .back-to-top svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* QoL History Section */
+        .history-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--soft-sand);
+            border-radius: 16px;
+        }
+
+        .history-section h4 {
+            margin-bottom: 1rem;
+            color: var(--deep-sage);
+        }
+
+        .history-empty {
+            color: var(--muted-slate);
+            font-style: italic;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .history-list {
+            list-style: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--soft-white);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-item-info {
+            flex: 1;
+        }
+
+        .history-item-pet {
+            font-weight: 600;
+            color: var(--deep-charcoal);
+        }
+
+        .history-item-date {
+            font-size: 0.85rem;
+            color: var(--muted-slate);
+        }
+
+        .history-item-score {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 8px;
+            margin-left: 1rem;
+        }
+
+        .history-item-score.good {
+            background: var(--gentle-sage);
+            color: white;
+        }
+
+        .history-item-score.moderate {
+            background: var(--warm-terracotta);
+            color: white;
+        }
+
+        .history-item-score.poor {
+            background: var(--soft-rose);
+            color: white;
+        }
+
+        .history-item-delete {
+            background: none;
+            border: none;
+            color: var(--muted-slate);
+            cursor: pointer;
+            padding: 0.5rem;
+            margin-left: 0.5rem;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+        }
+
+        .history-item-delete:hover {
+            opacity: 1;
+            color: var(--soft-rose);
+        }
+
+        .btn-save {
+            background: var(--gentle-sage);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-save:hover {
+            background: var(--deep-sage);
+            transform: translateY(-2px);
+        }
+
+        .btn-save:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-clear-history {
+            background: none;
+            border: 1px solid var(--muted-slate);
+            color: var(--muted-slate);
+            padding: 0.5rem 1rem;
+            font-family: inherit;
+            font-size: 0.85rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-clear-history:hover {
+            background: var(--soft-rose);
+            border-color: var(--soft-rose);
+            color: white;
+        }
+
         /* Skip to content link */
         .skip-link {
             position: absolute;
@@ -1264,6 +1436,17 @@
                         <div class="score-display" id="scoreDisplay">--</div>
                         <div class="score-label">out of <span id="maxScore">125</span> possible points</div>
                         <div class="score-interpretation" id="interpretation">Complete the assessment above</div>
+                        <button type="button" class="btn-save" id="btnSave" onclick="saveAssessment()">Save This Assessment</button>
+                    </div>
+
+                    <div class="history-section" id="historySection">
+                        <h4>Assessment History</h4>
+                        <p style="color: var(--muted-slate); font-size: 0.9rem; margin-bottom: 1rem;">
+                            Track your pet's quality of life over time. Assessments are saved locally on your device.
+                        </p>
+                        <div id="historyContent">
+                            <p class="history-empty">No saved assessments yet. Complete an assessment above and click "Save" to track over time.</p>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -1392,6 +1575,13 @@
         </section>
     </main>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4l-8 8h5v8h6v-8h5z"/>
+        </svg>
+    </button>
+
     <!-- Footer -->
     <footer class="footer">
         <p>
@@ -1508,6 +1698,173 @@
 
             // Smooth scroll to results
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Store current score for saving
+            window.currentAssessment = {
+                score: score,
+                maxScore: maxPossible,
+                percentage: percentage
+            };
+
+            // Enable save button
+            document.getElementById('btnSave').disabled = false;
+        }
+
+        // LocalStorage key for assessments
+        const STORAGE_KEY = 'qol_assessments';
+
+        // Save current assessment
+        function saveAssessment() {
+            if (!window.currentAssessment) return;
+
+            const petName = document.getElementById('petName').value || 'My Pet';
+            const date = document.getElementById('surveyDate').value || new Date().toISOString().split('T')[0];
+            const weight = document.getElementById('petWeight').value || '';
+
+            const assessment = {
+                id: Date.now(),
+                petName: petName,
+                date: date,
+                weight: weight,
+                score: window.currentAssessment.score,
+                maxScore: window.currentAssessment.maxScore,
+                percentage: window.currentAssessment.percentage
+            };
+
+            // Get existing assessments
+            const assessments = getAssessments();
+            assessments.unshift(assessment);
+
+            // Keep only last 50 assessments
+            if (assessments.length > 50) {
+                assessments.pop();
+            }
+
+            // Save to localStorage
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(assessments));
+
+            // Update display
+            renderHistory();
+
+            // Disable save button and show feedback
+            const btn = document.getElementById('btnSave');
+            btn.textContent = 'Saved!';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = 'Save This Assessment';
+            }, 2000);
+        }
+
+        // Get assessments from localStorage
+        function getAssessments() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        // Delete a single assessment
+        function deleteAssessment(id) {
+            const assessments = getAssessments().filter(a => a.id !== id);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(assessments));
+            renderHistory();
+        }
+
+        // Clear all history
+        function clearHistory() {
+            if (confirm('Are you sure you want to delete all saved assessments? This cannot be undone.')) {
+                localStorage.removeItem(STORAGE_KEY);
+                renderHistory();
+            }
+        }
+
+        // Render history list using safe DOM methods
+        function renderHistory() {
+            const container = document.getElementById('historyContent');
+            const assessments = getAssessments();
+
+            // Clear container
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+
+            if (assessments.length === 0) {
+                const emptyMsg = document.createElement('p');
+                emptyMsg.className = 'history-empty';
+                emptyMsg.textContent = 'No saved assessments yet. Complete an assessment above and click "Save" to track over time.';
+                container.appendChild(emptyMsg);
+                return;
+            }
+
+            const ul = document.createElement('ul');
+            ul.className = 'history-list';
+
+            assessments.forEach(a => {
+                const scoreClass = a.percentage >= 75 ? 'good' : (a.percentage >= 50 ? 'moderate' : 'poor');
+                const formattedDate = new Date(a.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+
+                const li = document.createElement('li');
+                li.className = 'history-item';
+
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'history-item-info';
+
+                const petDiv = document.createElement('div');
+                petDiv.className = 'history-item-pet';
+                petDiv.textContent = a.petName;
+
+                const dateDiv = document.createElement('div');
+                dateDiv.className = 'history-item-date';
+                dateDiv.textContent = formattedDate + (a.weight ? ' • ' + a.weight + ' lbs' : '');
+
+                infoDiv.appendChild(petDiv);
+                infoDiv.appendChild(dateDiv);
+
+                const scoreSpan = document.createElement('span');
+                scoreSpan.className = 'history-item-score ' + scoreClass;
+                scoreSpan.textContent = a.score;
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'history-item-delete';
+                deleteBtn.setAttribute('aria-label', 'Delete assessment');
+                deleteBtn.onclick = () => deleteAssessment(a.id);
+                deleteBtn.textContent = '×';
+
+                li.appendChild(infoDiv);
+                li.appendChild(scoreSpan);
+                li.appendChild(deleteBtn);
+                ul.appendChild(li);
+            });
+
+            container.appendChild(ul);
+
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'btn-clear-history';
+            clearBtn.textContent = 'Clear All History';
+            clearBtn.onclick = clearHistory;
+            container.appendChild(clearBtn);
+        }
+
+        // Back to Top functionality
+        function initBackToTop() {
+            const btn = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    btn.classList.add('visible');
+                } else {
+                    btn.classList.remove('visible');
+                }
+            });
+
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         }
 
         // Navigation toggle
@@ -1536,10 +1893,17 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             generateQOLTable();
-            
+
             // Set today's date
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('surveyDate').value = today;
+
+            // Initialize history and back to top
+            renderHistory();
+            initBackToTop();
+
+            // Disable save button initially
+            document.getElementById('btnSave').disabled = true;
 
             // Observe all sections
             document.querySelectorAll('.section').forEach(section => {
