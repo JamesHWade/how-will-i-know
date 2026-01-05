@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Will I Know? | Pet Quality of Life Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --warm-cream: #FAF7F2;
+            --soft-sand: #F5EDE4;
+            --gentle-sage: #9CAF88;
+            --deep-sage: #6B7F5C;
+            --warm-terracotta: #C4A484;
+            --soft-rose: #D4A5A5;
+            --muted-slate: #5D6B6B;
+            --deep-charcoal: #3D4444;
+            --soft-white: #FFFFFF;
+            --gentle-shadow: rgba(61, 68, 68, 0.08);
+            --medium-shadow: rgba(61, 68, 68, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--warm-cream);
+            color: var(--deep-charcoal);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* Subtle grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 9999;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 500;
+            line-height: 1.3;
+            color: var(--deep-charcoal);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--soft-sand);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--deep-sage);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted-slate);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gentle-sage);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--deep-sage);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(156, 175, 136, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(212, 165, 165, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-paw {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 2rem;
+            opacity: 0.6;
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--muted-slate);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.2s;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--muted-slate);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--muted-slate);
+            font-size: 0.85rem;
+            opacity: 0.6;
+            animation: fadeInUp 1s ease forwards 0.8s;
+            opacity: 0;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--muted-slate), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-intro {
+            background: var(--soft-white);
+            padding: 4rem 3rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 40px var(--gentle-shadow);
+            margin-bottom: 4rem;
+            border: 1px solid rgba(156, 175, 136, 0.1);
+        }
+
+        .section-intro p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--muted-slate);
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gentle-sage);
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--soft-white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 20px var(--gentle-shadow);
+            border: 1px solid rgba(156, 175, 136, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 40px var(--medium-shadow);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--deep-sage);
+        }
+
+        .card p {
+            color: var(--muted-slate);
+            margin-bottom: 1rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Question Lists */
+        .questions-list {
+            list-style: none;
+        }
+
+        .questions-list li {
+            padding: 1.25rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--soft-sand);
+            color: var(--muted-slate);
+        }
+
+        .questions-list li:last-child {
+            border-bottom: none;
+        }
+
+        .questions-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.5rem;
+            width: 8px;
+            height: 8px;
+            background: var(--gentle-sage);
+            border-radius: 50%;
+        }
+
+        /* Myths Section */
+        .myth-card {
+            background: linear-gradient(135deg, var(--soft-white) 0%, var(--soft-sand) 100%);
+            border-left: 4px solid var(--soft-rose);
+        }
+
+        .myth-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--deep-charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .myth-response {
+            color: var(--muted-slate);
+            font-size: 0.95rem;
+        }
+
+        /* Quality of Life Scale */
+        .qol-section {
+            background: var(--soft-white);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 4px 40px var(--gentle-shadow);
+        }
+
+        .qol-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--soft-sand);
+        }
+
+        .qol-header h2 {
+            margin-bottom: 1rem;
+        }
+
+        .qol-header p {
+            color: var(--muted-slate);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .qol-form-header {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--soft-sand);
+            border-radius: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--muted-slate);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input {
+            padding: 0.75rem 1rem;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--soft-white);
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gentle-sage);
+        }
+
+        .qol-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 2rem;
+        }
+
+        .qol-table thead th {
+            background: var(--deep-sage);
+            color: var(--soft-white);
+            padding: 1rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .qol-table thead th:first-child {
+            border-radius: 12px 0 0 0;
+            text-align: left;
+            padding-left: 1rem;
+        }
+
+        .qol-table thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+
+        .qol-table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .qol-table tbody tr:hover {
+            background: var(--soft-sand);
+        }
+
+        .qol-table tbody td {
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid var(--soft-sand);
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .qol-table tbody td:first-child {
+            text-align: left;
+            padding-left: 1rem;
+            color: var(--muted-slate);
+            font-size: 0.95rem;
+        }
+
+        .qol-radio-group {
+            display: flex;
+            justify-content: center;
+        }
+
+        .qol-radio {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .qol-radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .qol-radio-mark {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--warm-terracotta);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .qol-radio input:checked + .qol-radio-mark {
+            background: var(--gentle-sage);
+            border-color: var(--gentle-sage);
+        }
+
+        .qol-radio input:checked + .qol-radio-mark::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--soft-white);
+            border-radius: 50%;
+        }
+
+        .qol-radio:hover .qol-radio-mark {
+            border-color: var(--gentle-sage);
+        }
+
+        /* Overall Rating Slider */
+        .overall-rating {
+            background: var(--soft-sand);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .overall-rating h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .overall-rating p {
+            color: var(--muted-slate);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .slider-container {
+            position: relative;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--muted-slate);
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, var(--soft-rose), var(--warm-terracotta), var(--gentle-sage));
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--soft-white);
+            border: 3px solid var(--deep-sage);
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--medium-shadow);
+            transition: transform 0.2s ease;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        /* Results */
+        .results-section {
+            background: var(--soft-sand);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .score-display {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            color: var(--deep-sage);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            color: var(--muted-slate);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-interpretation {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--soft-white);
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--deep-charcoal);
+        }
+
+        .btn-calculate {
+            background: var(--deep-sage);
+            color: var(--soft-white);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-calculate:hover {
+            background: var(--muted-slate);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--medium-shadow);
+        }
+
+        /* Techniques Section */
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .technique-card {
+            background: var(--soft-white);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 2px 20px var(--gentle-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .technique-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .technique-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background: var(--soft-sand);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .technique-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--deep-sage);
+        }
+
+        .technique-card p {
+            color: var(--muted-slate);
+            font-size: 0.9rem;
+        }
+
+        /* Children & Other Pets Sections */
+        .info-box {
+            background: linear-gradient(135deg, rgba(156, 175, 136, 0.1) 0%, rgba(212, 165, 165, 0.1) 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            color: var(--deep-sage);
+            margin-bottom: 1rem;
+        }
+
+        .info-box p {
+            color: var(--muted-slate);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--deep-charcoal);
+            padding: 1.5rem 2rem;
+            background: var(--soft-white);
+            border-left: 4px solid var(--gentle-sage);
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: var(--deep-sage);
+            color: var(--soft-white);
+            padding: 4rem 3rem;
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .resources-section h2 {
+            color: var(--soft-white);
+            margin-bottom: 1rem;
+        }
+
+        .resources-section p {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--muted-slate);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--deep-sage);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-heart {
+            display: inline-block;
+            color: var(--soft-rose);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Mobile Navigation */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--muted-slate);
+            transition: transform 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--soft-white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 20px var(--gentle-shadow);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .content {
+                padding: 0 1rem;
+            }
+
+            .section-intro, .card, .qol-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .qol-form-header {
+                grid-template-columns: 1fr;
+            }
+
+            .qol-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .qol-table thead th,
+            .qol-table tbody td {
+                padding: 0.75rem 0.25rem;
+                font-size: 0.8rem;
+            }
+
+            .qol-table tbody td:first-child {
+                min-width: 180px;
+            }
+
+            .resources-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav, .hero-scroll, .btn-calculate {
+                display: none;
+            }
+
+            .section {
+                opacity: 1;
+                transform: none;
+                page-break-inside: avoid;
+            }
+
+            .qol-section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">Honoring the Bond</a>
+            <div class="nav-toggle" onclick="toggleNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#decisions">Making Decisions</a></li>
+                <li><a href="#myths">Understanding Euthanasia</a></li>
+                <li><a href="#assessment">Quality of Life</a></li>
+                <li><a href="#family">Family Support</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <svg class="hero-paw" viewBox="0 0 100 100" fill="currentColor">
+            <ellipse cx="50" cy="75" rx="20" ry="18" fill="var(--gentle-sage)"/>
+            <ellipse cx="25" cy="45" rx="12" ry="15" fill="var(--gentle-sage)"/>
+            <ellipse cx="50" cy="35" rx="12" ry="15" fill="var(--gentle-sage)"/>
+            <ellipse cx="75" cy="45" rx="12" ry="15" fill="var(--gentle-sage)"/>
+        </svg>
+        <h1>How Will I Know?</h1>
+        <p class="hero-subtitle">
+            A compassionate guide to assessing quality of life and making 
+            difficult decisions for your beloved companion
+        </p>
+        <div class="hero-scroll">
+            <span>Scroll to begin</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="content">
+        <!-- Introduction -->
+        <section class="section" id="intro">
+            <div class="section-intro">
+                <p>
+                    As pet owners, we accept the loving responsibility of making decisions about the health 
+                    and well-being of our animals. These may be pleasant decisions, like what food to choose 
+                    or what type of activities we enjoy together. However, pet ownership also means being 
+                    faced with difficult decisions, such as whether or not to go forward with surgery or 
+                    treatment of a disease.
+                </p>
+                <br>
+                <p>
+                    Often the hardest decisions we face regarding our pets involve geriatric and end-of-life care. 
+                    The needs and beliefs of each family are different, and what might be the right choice for 
+                    one pet may not be right for another. It is our hope that this guide will help and support you, 
+                    whether you are considering a particular treatment plan or end-of-life care.
+                </p>
+            </div>
+        </section>
+
+        <!-- Making Difficult Decisions -->
+        <section class="section" id="decisions">
+            <h2 class="section-title">Making Difficult Decisions</h2>
+            
+            <div class="card">
+                <h3>Questions Before Treatment Decisions</h3>
+                <p>When considering surgery, chemotherapy, or other significant treatments, ask yourself:</p>
+                <ul class="questions-list">
+                    <li>What will happen in the near future that will be significant to my pet? Can my pet's pain or anxiety about upcoming procedures be well-controlled while hospitalized or healing?</li>
+                    <li>Is the procedure likely to give my pet good quality of life for some period of time? How do I feel about the medical information I've been given about my pet's prognosis?</li>
+                    <li>Do I have the financial resources to go forward with the procedure and handle ongoing treatment expenses? Can I sacrifice from other areas of my family's budget to provide this care?</li>
+                    <li>Do I feel like I have all the information I need to make this decision comfortably? Are there questions I need to ask my veterinarian?</li>
+                    <li>Do I have the emotional and physical stamina to provide the ongoing care my pet needs? Am I ready to undertake care such as lifting, assisting with walking, bathroom functions, physical therapy, medication, feeding tubes, or overnight monitoring?</li>
+                    <li>What is my personal "bottom line" with regard to my family's lifestyle and how it will be impacted by this decision?</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Questions Before End-of-Life Decisions</h3>
+                <p>When considering euthanasia or hospice care:</p>
+                <ul class="questions-list">
+                    <li>What are my religious, spiritual and personal beliefs regarding end-of-life care? Do I have a trusted friend, spiritual advisor or veterinarian who can help me make this decision?</li>
+                    <li>Have I asked the questions I need to ask in order to feel knowledgeable about euthanasia? Do I have fears or concerns I would like to discuss with my veterinarian?</li>
+                    <li>Are there friends or family members who are close to my pet and would like to be included in this decision, or who would like to be present?</li>
+                    <li>What is the value for my pet to continue to live this way? What is the value for me or my family members? Is the value higher for us than for our pet?</li>
+                    <li>If I elect to provide hospice care, are my veterinarian and I able to adequately control my pet's discomfort or anxiety? Will I be honest with myself if my pet's symptoms are no longer well-controlled?</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>Understanding Anticipatory Grief</h4>
+                <p>
+                    When a pet goes through a serious illness or a decline in health, it is very natural for a pet owner 
+                    to experience "anticipatory grief"—grieving before the pet's death. Just like grief after a death, 
+                    anticipatory grief involves physical, emotional and mental reactions that can create sadness, denial 
+                    and difficulty processing information.
+                </p>
+                <p>
+                    The impending loss of a pet may bring back emotions related to other losses or deaths you may have 
+                    experienced, which compounds the difficult emotions. Know that these feelings are completely normal.
+                </p>
+            </div>
+        </section>
+
+        <!-- Myths and Misconceptions -->
+        <section class="section" id="myths">
+            <h2 class="section-title">Understanding Euthanasia</h2>
+            <p style="color: var(--muted-slate); margin-bottom: 2rem;">
+                There are many misconceptions about euthanasia that can make this difficult time even harder. 
+                Understanding the truth can help bring peace to your decision.
+            </p>
+
+            <div class="card myth-card">
+                <p class="myth-title">"My pet will die peacefully at home surrounded by family."</p>
+                <p class="myth-response">
+                    Only a very small percentage of pets experience a "good" death without our help. Many distressing 
+                    changes can happen during the dying process: anxiety, difficulty breathing, severe nausea, and seizures. 
+                    Many pets who are allowed to die naturally will do so overnight or while the owner is away, leading to 
+                    regret that the pet was alone. At-home euthanasia is offered by many veterinarians and provides a 
+                    controlled, pain-free option for owners who prefer end-of-life care to happen at home.
+                </p>
+            </div>
+
+            <div class="card myth-card">
+                <p class="myth-title">"I would be killing my pet."</p>
+                <p class="myth-response">
+                    Remember that your pet's illness, disease or injury is doing the harm to your pet. Euthanasia provides 
+                    the opportunity to allow your pet to die humanely and with dignity. It is their illness which causes 
+                    suffering; you are relieving that suffering in a loving and respectful way.
+                </p>
+            </div>
+
+            <div class="card myth-card">
+                <p class="myth-title">"Euthanasia is not natural."</p>
+                <p class="myth-response">
+                    If you have religious or spiritual beliefs about euthanasia, please be honest with your veterinary team 
+                    so they may try to honor and respect your beliefs. Much of the medical care we provide our pets is, 
+                    by definition, interrupting a "natural" process or illness. As Moira Anderson Allen wrote: "Euthanasia 
+                    is often not so much a question of 'artificially ending' a life, but of when to cease artificially extending that life."
+                </p>
+            </div>
+
+            <div class="card myth-card">
+                <p class="myth-title">"My pet will know what is happening."</p>
+                <p class="myth-response">
+                    When handled properly, the euthanasia process is a loving, peaceful, dignified end of a pet's life. 
+                    Veterinarians can give medications including sedation and pain relief that will ease your pet's anxiety 
+                    and pain, often inducing deep sleep just prior to the euthanasia injection. Animals live in the present 
+                    moment. Unlike us, they don't know that a choice is being made—they only know that they are being loved, 
+                    that you are with them, and that they don't feel pain anymore.
+                </p>
+            </div>
+
+            <div class="card myth-card">
+                <p class="myth-title">"I will just know when it's time." or "My pet will let me know."</p>
+                <p class="myth-response">
+                    While there are sometimes signs, events or symptoms that make the choice obvious, often the choice is not clear. 
+                    Many families tell us that they waited too long; families rarely tell us they made the decision too soon. 
+                    Please know that it is normal and natural to second-guess a decision and that second-guessing does not mean 
+                    you made the wrong choice. In cases of illness or declining quality of life, there is truly no wrong decision 
+                    to be made, only the decision you feel is best for your pet and your family.
+                </p>
+            </div>
+
+            <div class="highlight-text">
+                "It can feel odd or wrong to schedule a time for your pet's euthanasia. By scheduling ahead, you are 
+                taking some control over a situation over which you have little power. Many owners find comfort in 
+                scheduling a time when friends or family members can be present, or before their pet is truly suffering."
+            </div>
+        </section>
+
+        <!-- How Do I Know It's Time -->
+        <section class="section" id="techniques">
+            <h2 class="section-title">How Do I Know It's Time?</h2>
+            <p style="color: var(--muted-slate); margin-bottom: 2rem;">
+                Several tools and techniques may provide more concrete answers to this deeply personal question.
+            </p>
+
+            <div class="techniques-grid">
+                <div class="technique-card">
+                    <div class="technique-icon">📷</div>
+                    <h4>Look Back at Photos</h4>
+                    <p>When your pet's health has been declining slowly, viewing photos or videos from before the illness can help you remember how your pet looked, behaved and interacted with you.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-icon">💝</div>
+                    <h4>List Favorite Activities</h4>
+                    <p>Make a list of 3-5 things your pet likes to do, such as going for walks, playing, or enjoying meals. When your pet consistently can't enjoy these things, it may be time to discuss euthanasia.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-icon">📅</div>
+                    <h4>Track Good & Bad Days</h4>
+                    <p>Mark good and bad days on a calendar with a simple happy or sad face. As bad days start to outnumber good ones, it may be time to consider your options.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-icon">📋</div>
+                    <h4>Quality of Life Scale</h4>
+                    <p>Complete a quality of life assessment regularly. Having each family member complete it independently can provide different perspectives on your pet's wellbeing.</p>
+                </div>
+            </div>
+
+            <div class="info-box" style="margin-top: 2rem;">
+                <h4>Enlist Help from Others You Trust</h4>
+                <p>
+                    It may be helpful to ask those closest to you (and your pet) for their honest opinion about your pet's 
+                    health and quality of life. Consider asking someone who sees your pet less frequently, since gradual 
+                    decline may be more obvious to them.
+                </p>
+                <p>
+                    Your veterinarian can provide valuable information about treatment options and prognosis. While they 
+                    cannot make the euthanasia decision for you, they can give you an honest medical perspective about 
+                    your pet's current condition and comfort.
+                </p>
+            </div>
+        </section>
+
+        <!-- Quality of Life Assessment -->
+        <section class="section" id="assessment">
+            <div class="qol-section">
+                <div class="qol-header">
+                    <h2 class="section-title" style="display: block; text-align: center;">Quality of Life Assessment</h2>
+                    <p>
+                        Higher numbers equal a better quality of life. Remember that all pets are different—what may 
+                        be considered poor quality of life for one may be different for another. Even one item on 
+                        the left side (such as pain) may indicate poor quality of life, even if other items are positive.
+                    </p>
+                </div>
+
+                <div class="qol-form-header">
+                    <div class="form-group">
+                        <label for="petName">Pet's Name</label>
+                        <input type="text" id="petName" placeholder="Your companion's name">
+                    </div>
+                    <div class="form-group">
+                        <label for="surveyDate">Date</label>
+                        <input type="date" id="surveyDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="petWeight">Weight</label>
+                        <input type="text" id="petWeight" placeholder="lbs">
+                    </div>
+                </div>
+
+                <form id="qolForm">
+                    <table class="qol-table">
+                        <thead>
+                            <tr>
+                                <th>My pet...</th>
+                                <th>Strongly Agree<br><small>(All the Time / Severe)</small></th>
+                                <th>Agree<br><small>(Most of the Time)</small></th>
+                                <th>Neutral<br><small>(Sometimes / Mild)</small></th>
+                                <th>Disagree<br><small>(Occasionally)</small></th>
+                                <th>Strongly Disagree<br><small>(Never / None)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody id="qolTableBody">
+                            <!-- Rows will be generated by JavaScript -->
+                        </tbody>
+                    </table>
+
+                    <div class="overall-rating">
+                        <h4>Overall Health Compared to Initial Diagnosis</h4>
+                        <p>How is your pet's overall health compared to when they were first diagnosed or became ill?</p>
+                        <div class="slider-container">
+                            <div class="slider-labels">
+                                <span>Worse</span>
+                                <span>Same</span>
+                                <span>Better</span>
+                            </div>
+                            <input type="range" class="slider" id="overallHealth" min="1" max="5" value="3">
+                        </div>
+                    </div>
+
+                    <div class="overall-rating">
+                        <h4>Current Quality of Life</h4>
+                        <p>Place the slider along the line that best fits your pet's current quality of life.</p>
+                        <div class="slider-container">
+                            <div class="slider-labels">
+                                <span>Poor</span>
+                                <span>Fair</span>
+                                <span>Good</span>
+                            </div>
+                            <input type="range" class="slider" id="overallQOL" min="1" max="10" value="5">
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button type="button" class="btn-calculate" onclick="calculateScore()">Calculate Score</button>
+                    </div>
+
+                    <div class="results-section" id="resultsSection" style="display: none; margin-top: 2rem;">
+                        <div class="score-display" id="scoreDisplay">--</div>
+                        <div class="score-label">out of <span id="maxScore">125</span> possible points</div>
+                        <div class="score-interpretation" id="interpretation">Complete the assessment above</div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Family Support -->
+        <section class="section" id="family">
+            <h2 class="section-title">Supporting Your Family</h2>
+
+            <div class="card">
+                <h3>How Euthanasia Affects Children</h3>
+                <p>
+                    Children can learn valuable lessons about responsibility, compassion, commitment, and coping when 
+                    they are involved in the decision-making process regarding a family pet. Use your judgment as a 
+                    parent regarding your child's personality, age, and level of development.
+                </p>
+                <div class="info-box" style="margin: 1.5rem 0;">
+                    <h4>Important Language Guidance</h4>
+                    <p>
+                        Avoid the phrase "put to sleep," since young children may interpret this literally and become 
+                        fearful of sleep for themselves or other loved ones. This phrase may also create confusion 
+                        about anesthesia for routine procedures. Using the simple term "die" or "help to die peacefully" 
+                        may eliminate confusion.
+                    </p>
+                </div>
+                <p>
+                    If you decide to have children present for the euthanasia, prepare them ahead of time for what to 
+                    expect. Use language that is simple and clear. For example: "The veterinarian is going to give 
+                    [pet's name] medicine that will make their heart stop beating and make them stop breathing. It will not hurt them."
+                </p>
+                <p>
+                    <strong>Most importantly, it is okay to show your emotions.</strong> Allow your children to see that 
+                    being sad is normal and natural, so they feel invited to express and share their own feelings. This 
+                    has been shown to ease the grieving process for children and adults alike.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>How Euthanasia Affects Other Pets</h3>
+                <p>
+                    Some owners have reported fewer disruptions in their surviving animal's behavior when the surviving 
+                    pet was allowed to see and smell the deceased pet after euthanasia.
+                </p>
+                <p>
+                    If you are considering having your other pet present during euthanasia, an important consideration 
+                    is that your emotions may startle your surviving pet. On the other hand, some owners feel comforted 
+                    by their presence.
+                </p>
+                <p>
+                    Keep in mind that you cannot predict how your surviving pet will react. Behaviors that may seem 
+                    disrespectful—such as stepping on, urinating on, or barking at the deceased pet—are all normal 
+                    behaviors for animals, especially if they sense your stress. Changes in the social structure of 
+                    pets still in the home can be disrupted by a loss, and they may struggle to determine their new place.
+                </p>
+            </div>
+
+            <div class="highlight-text">
+                "When you have decided on the time for the euthanasia, you may choose to be present or not. 
+                There is no right or wrong choice, only a loving choice."
+            </div>
+
+            <div class="card">
+                <h3>Treasuring Your Time</h3>
+                <p>
+                    If you have decided that euthanasia is the most appropriate choice, you may choose a variety of 
+                    ways to spend the last months, weeks, or days of your companion animal's life:
+                </p>
+                <ul class="questions-list">
+                    <li>Spending extra time together with additional petting, grooming, or holding</li>
+                    <li>Making them special meals to eat (check with your veterinarian about what would be suitable)</li>
+                    <li>Going on a special trip or walk together</li>
+                    <li>Simply being present with them in quiet, comfortable moments</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="section" id="resources">
+            <div class="resources-section">
+                <h2>Finding Support</h2>
+                <p>
+                    You don't have to navigate this journey alone. There are resources available to help 
+                    you and your family through this difficult time.
+                </p>
+                
+                <div style="text-align: left; max-width: 550px; margin: 2rem auto; background: rgba(255,255,255,0.1); padding: 1.5rem 2rem; border-radius: 12px;">
+                    <p style="margin-bottom: 0.75rem; opacity: 0.95;">Consider reaching out for help with:</p>
+                    <ul style="list-style: none; opacity: 0.9;">
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0;">•</span>
+                            Your veterinarian for medical guidance and options
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0;">•</span>
+                            Pet loss support groups and hotlines
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0;">•</span>
+                            Counselors who specialize in grief and pet loss
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0;">•</span>
+                            Trusted friends and family members
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0;">•</span>
+                            Veterinary social workers at teaching hospitals
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.15); border-radius: 12px; max-width: 550px; margin-left: auto; margin-right: auto;">
+                    <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1rem;">
+                        This guide is adapted from materials created by <strong>The Ohio State University 
+                        Veterinary Medical Center's Honoring the Bond Program</strong>, which provides 
+                        support to companion animal owners.
+                    </p>
+                    <a href="https://vmc.vet.osu.edu/services/honoring-the-bond" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--soft-white); color: var(--deep-sage); text-decoration: none; border-radius: 30px; font-weight: 600; transition: transform 0.2s ease;">
+                        Visit the Original Program →
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            Adapted with gratitude from 
+            <a href="https://vmc.vet.osu.edu/services/honoring-the-bond" target="_blank" rel="noopener">
+                The Ohio State University Veterinary Medical Center's Honoring the Bond Program
+            </a>
+        </p>
+        <p style="margin-top: 1rem;">
+            Made with <span class="footer-heart">♥</span> for those who love their companions
+        </p>
+    </footer>
+
+    <script>
+        // Quality of Life Assessment Questions
+        const qolQuestions = [
+            "does not want to play",
+            "does not respond to my presence or interact with me the same way as before",
+            "does not enjoy the same activities as before",
+            "is hiding",
+            "demeanor/behavior is not the same as it was prior to diagnosis/illness",
+            "does not seem to enjoy life",
+            "has more bad days than good days",
+            "is sleeping more than usual",
+            "seems dull and depressed",
+            "seems to be or is experiencing pain",
+            "is panting (even while resting)",
+            "is trembling or shaking",
+            "is vomiting and/or seems nauseous",
+            "is not eating well (may only be eating treats or only if fed by hand)",
+            "is not drinking well",
+            "is losing weight",
+            "is having diarrhea often",
+            "is not urinating well",
+            "is not moving normally",
+            "is not as active as normal",
+            "does not move around as needed",
+            "needs my help to move around normally",
+            "is unable to keep self clean after soiling",
+            "has coat that is greasy, matted, or rough-looking"
+        ];
+
+        // Generate table rows
+        function generateQOLTable() {
+            const tbody = document.getElementById('qolTableBody');
+            qolQuestions.forEach((question, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${question}</td>
+                    ${[1,2,3,4,5].map(value => `
+                        <td>
+                            <div class="qol-radio-group">
+                                <label class="qol-radio">
+                                    <input type="radio" name="q${index}" value="${value}">
+                                    <span class="qol-radio-mark"></span>
+                                </label>
+                            </div>
+                        </td>
+                    `).join('')}
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Calculate score
+        function calculateScore() {
+            let score = 0;
+            let answered = 0;
+            
+            qolQuestions.forEach((_, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected) {
+                    score += parseInt(selected.value);
+                    answered++;
+                }
+            });
+
+            const overallHealth = parseInt(document.getElementById('overallHealth').value);
+            score += overallHealth;
+            answered++;
+
+            const maxPossible = (qolQuestions.length * 5) + 5; // 24 questions * 5 + 5 for overall health
+            document.getElementById('maxScore').textContent = maxPossible;
+            
+            const resultsSection = document.getElementById('resultsSection');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const interpretation = document.getElementById('interpretation');
+
+            if (answered < 10) {
+                resultsSection.style.display = 'block';
+                scoreDisplay.textContent = '--';
+                interpretation.textContent = 'Please answer more questions for an accurate assessment';
+                return;
+            }
+
+            resultsSection.style.display = 'block';
+            scoreDisplay.textContent = score;
+
+            const percentage = (score / maxPossible) * 100;
+            
+            if (percentage >= 75) {
+                interpretation.textContent = 'Generally good quality of life';
+                interpretation.style.background = 'var(--gentle-sage)';
+                interpretation.style.color = 'white';
+            } else if (percentage >= 50) {
+                interpretation.textContent = 'Quality of life concerns - discuss with your veterinarian';
+                interpretation.style.background = 'var(--warm-terracotta)';
+                interpretation.style.color = 'white';
+            } else {
+                interpretation.textContent = 'Significant quality of life concerns - please consult your veterinarian';
+                interpretation.style.background = 'var(--soft-rose)';
+                interpretation.style.color = 'white';
+            }
+
+            // Smooth scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Navigation toggle
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            generateQOLTable();
+            
+            // Set today's date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('surveyDate').value = today;
+
+            // Observe all sections
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Smooth scroll for nav links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        document.getElementById('navLinks').classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Close nav on outside click
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('.nav');
+            const navLinks = document.getElementById('navLinks');
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
