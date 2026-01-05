@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>How Will I Know? | Pet Quality of Life Guide</title>
     <meta name="description" content="A compassionate guide to help pet owners assess quality of life and make difficult end-of-life decisions for their beloved companions. Includes an interactive quality of life assessment tool.">
 
@@ -34,6 +35,29 @@
             --soft-white: #FFFFFF;
             --gentle-shadow: rgba(61, 68, 68, 0.08);
             --medium-shadow: rgba(61, 68, 68, 0.12);
+            --nav-bg: rgba(250, 247, 242, 0.95);
+            --overlay-white: rgba(255, 255, 255, 0.1);
+            --overlay-white-strong: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Dark mode - automatic based on system preference */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --warm-cream: #1a1d1d;
+                --soft-sand: #252929;
+                --gentle-sage: #9CAF88;
+                --deep-sage: #a8c296;
+                --warm-terracotta: #d4b494;
+                --soft-rose: #e4b5b5;
+                --muted-slate: #b8c4c4;
+                --deep-charcoal: #e8ecec;
+                --soft-white: #2a2f2f;
+                --gentle-shadow: rgba(0, 0, 0, 0.3);
+                --medium-shadow: rgba(0, 0, 0, 0.4);
+                --nav-bg: rgba(26, 29, 29, 0.95);
+                --overlay-white: rgba(255, 255, 255, 0.05);
+                --overlay-white-strong: rgba(255, 255, 255, 0.08);
+            }
         }
 
         * {
@@ -82,7 +106,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(250, 247, 242, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 2rem;
@@ -1325,7 +1349,7 @@
                     you and your family through this difficult time.
                 </p>
                 
-                <div style="text-align: left; max-width: 550px; margin: 2rem auto; background: rgba(255,255,255,0.1); padding: 1.5rem 2rem; border-radius: 12px;">
+                <div style="text-align: left; max-width: 550px; margin: 2rem auto; background: var(--overlay-white); padding: 1.5rem 2rem; border-radius: 12px;">
                     <p style="margin-bottom: 0.75rem; opacity: 0.95;">Consider reaching out for help with:</p>
                     <ul style="list-style: none; opacity: 0.9;">
                         <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
@@ -1351,7 +1375,7 @@
                     </ul>
                 </div>
 
-                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.15); border-radius: 12px; max-width: 550px; margin-left: auto; margin-right: auto;">
+                <div style="margin-top: 2rem; padding: 1.5rem; background: var(--overlay-white-strong); border-radius: 12px; max-width: 550px; margin-left: auto; margin-right: auto;">
                     <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1rem;">
                         This guide is adapted from materials created by <strong>The Ohio State University 
                         Veterinary Medical Center's Honoring the Bond Program</strong>, which provides 
