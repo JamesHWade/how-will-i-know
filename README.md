@@ -14,7 +14,7 @@ This interactive guide helps pet owners through one of the most difficult experi
 
 ## Live Site
 
-View the live site at: `https://[your-username].github.io/[repo-name]/`
+View the live site at: `https://jameshwade.github.io/how-will-i-know/`
 
 ## Attribution
 
